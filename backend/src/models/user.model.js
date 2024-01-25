@@ -12,13 +12,14 @@ const userSchema = new mongoose.Schema({
         required:[true,"Email is required"],
         unique:true,
     },
-    avatar:{
-        type:String,
-        required:true,
-    },
+   
     password:{
         type:String,
         required:[true,"Password is required"],
+    },
+    avatar:{
+        type:String,
+        required:true,
     },
     refreshToken:{
         type:String
