@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import '../scss/Auth.scss'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import axios from 'axios'
 const Login = () => {
     const [user ,setUser] = useState({
         email:'',
         password:''
     })
+    const navigate = useNavigate();
     const handleChange = (e)=>{
         let name = e.target.name;
         let value = e.target.value;
@@ -20,9 +21,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:8000/api/v1/users/log-in',user);
             console.log(response);
-            if(response){
-
-            }
+            navigate('/notes')
         } catch (error) {
             console.log("login error: ",error);
         }
@@ -57,4 +56,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export  default Login

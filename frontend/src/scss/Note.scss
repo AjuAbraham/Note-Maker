@@ -1,0 +1,89 @@
+.container{
+    max-width: 100vw;
+    height: 100vh;
+
+}
+.nav{
+    display: flex;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    background-color: blueviolet;
+}
+.logoHead{
+    >h4{
+        margin-left: 40px;
+        color: white;
+    }
+
+}
+.profile{
+     margin-right: 40px;
+     cursor: pointer;
+>img{
+    width: 50px;
+    border-radius: 50%;
+}
+}
+.create-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    >button{
+        width: 6rem;
+        cursor: pointer;
+        height: 3rem;
+        padding: 8px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        >.link{
+            text-decoration: none;
+            font-weight: bolder;
+            font-size: 0.8rem;
+            color: #f7f7f9;
+        }
+    }
+    >.search{
+        cursor: pointer;
+        
+        &:hover{
+            color: blue;
+        }
+    }
+}
+.search-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    margin-left: 180px;
+    position: absolute;
+    left: 600px;
+    top: 180px;
+    >form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        >input{
+            padding: 10px;
+            border: 1px solid gray;
+            border-radius: 8px;
+        }
+        >.document-search{
+            cursor: pointer;
+            
+        }
+    }
+}
+.search-form,.open{
+    max-height: 300px;
+}
+
+
+

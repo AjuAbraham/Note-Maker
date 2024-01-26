@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useState } from 'react'
 import '../scss/Auth.scss'
 import axios from 'axios'
@@ -12,7 +12,8 @@ const Register = () => {
   });
   const [file,setFile] = useState();
   const navigate = useNavigate();
-  const handleChange = (e)=>{
+  const handleChange = useCallback(
+    (e)=>{
     let name = e.target.name;
     let value = e.target.value;
     if (name === "avatar") {
@@ -23,7 +24,7 @@ const Register = () => {
             [name]: value
         });
     }
-  }
+  },[setFile,setUser])
  const handleSubmit = async (e)=>{
     e.preventDefault();
     const formData = new FormData();
