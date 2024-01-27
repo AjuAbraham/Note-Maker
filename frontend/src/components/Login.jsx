@@ -19,7 +19,7 @@ const Login = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/users/log-in',user);
+            const response = await axios.post('http://localhost:8000/api/v1/users/log-in',user,{withCredentials:true});
             console.log(response);
             navigate('/notes')
         } catch (error) {

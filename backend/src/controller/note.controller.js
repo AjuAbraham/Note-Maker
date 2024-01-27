@@ -91,5 +91,16 @@ const displayNote = asyncHandler(async (req,res)=>{
       }
       res.status(200).json(new ApiResponse(200,note,"Notes fetched successfully"))
 })
+const displaySpecificNote = asyncHandler(async (req,res)=>{
+    const {noteId} = req.params;
+    if(!isValidObjectId(noteId)){
+        throw new ApiError(400,"Note Id is invalid")
+    }
+    const note = await Note.findById(noteId).select("title content");
+    if(!note){
+        throw new ApiError(500,"Unable to find specified note");
+    }
+   res.status(200).json(new ApiResponse(200,note,"note fetched successfully"))
+})
 
-export {createNote,updateNoteTitle,updateNoteContent,deleteNote,displayNote}
+export {createNote,updateNoteTitle,updateNoteContent,deleteNote,displayNote,displaySpecificNote}

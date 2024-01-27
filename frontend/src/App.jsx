@@ -5,6 +5,7 @@ import '../src/scss/App.scss'
 import Login from './components/Login.jsx'
 import Notes from './components/Notes.jsx'
 import NoteForm from './components/NoteForm.jsx'
+import EditNote from './components/EditNote.jsx'
 function App() {
  
 
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/notes' element={ <Notes/> }/>
         <Route path='/createNote' element={ <NoteForm/> }/>
+        <Route path='/editNote/:noteId' element={ <EditNote/> }/>
       </Routes>
     </Router>
   )

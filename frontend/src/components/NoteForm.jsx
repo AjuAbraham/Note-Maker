@@ -5,6 +5,7 @@ import axios from 'axios'
 
 const navigate = useNavigate
 const NoteForm = () => {
+  const navigate = useNavigate();
   const [note,setNote] = useState({
      title:'',
      content:''
