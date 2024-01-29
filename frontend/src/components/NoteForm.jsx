@@ -3,7 +3,6 @@ import {Link,useNavigate} from 'react-router-dom'
 import '../scss/NoteForm.scss';
 import axios from 'axios'
 
-const navigate = useNavigate
 const NoteForm = () => {
   const navigate = useNavigate();
   const [note,setNote] = useState({

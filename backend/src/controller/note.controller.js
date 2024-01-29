@@ -25,49 +25,30 @@ const createNote = asyncHandler(async (req,res)=>{
     res.status(200).json(new ApiResponse(200,checkCreated,"Note created successfully"))
 })
 
-const updateNoteTitle = asyncHandler(async (req,res)=>{
-    const {newTitle} = req.body;
+const updateNote = asyncHandler(async (req,res)=>{
+    const {title,content} = req.body;
     const {noteId}= req.params;
-    if(!newTitle){
-        throw new ApiError(400,"Title is required to update")
+    if(!title || !content){
+        throw new ApiError(400,"Title or content is required to update")
     }
     if(!isValidObjectId(noteId)){
         throw new ApiError(400,"Note Id is invalid")
     }
 
     const note= await Note.findById(noteId);
-    if(note.title=== newTitle){
-        throw new ApiError(400,"This Title already exsist");
+    if(!note){
+        throw new ApiError(500,"Unable to find note")
     }
-
-    const updateTitle = await Note.findByIdAndUpdate(noteId,{
-        $set:{title:newTitle}
+    const updateNoteDetail = await Note.findByIdAndUpdate(noteId,{
+        $set:{title,content}
     },{new:true})
-    if(!updateTitle){
-        throw new ApiError(500,"Title was not Updated")
+    if(!updateNoteDetail){
+        throw new ApiError(500,"Note was not Updated")
     }
-    res.status(200).json(new ApiResponse(200,"title updated successfully"))
+    res.status(200).json(new ApiResponse(200,"Note updated successfully"))
    
 })
-const updateNoteContent = asyncHandler(async (req,res)=>{
-    const {content} = req.body;
-    const {noteId} = req.params;
-    if(!content){
-        throw new ApiError(400,"Content is required to update")
-    }
-    if(!isValidObjectId(noteId)){
-        throw new ApiError(400,"Note Id is invalid")
-    }
-    const updateContent = await Note.findByIdAndUpdate(noteId,{
-        $set:{content}
-    },{new:true})
 
-    if(!updateContent){
-        throw new ApiError(500,"Content was not Updated")
-    }
-    res.status(200).json(new ApiResponse(200,"Content updated successfully"))
-   
-})
 
 const deleteNote = asyncHandler(async (req,res)=>{
      const {noteId}= req.params;
@@ -87,7 +68,7 @@ const displayNote = asyncHandler(async (req,res)=>{
         throw new ApiError(500,"Unable to fetch notes")
       }
       if(note.length===0){
-        res.status(200).json(new ApiResponse(200,"User have 0 notes"))
+        return res.status(200).json(new ApiResponse(200,"User have 0 notes"))
       }
       res.status(200).json(new ApiResponse(200,note,"Notes fetched successfully"))
 })
@@ -103,4 +84,4 @@ const displaySpecificNote = asyncHandler(async (req,res)=>{
    res.status(200).json(new ApiResponse(200,note,"note fetched successfully"))
 })
 
-export {createNote,updateNoteTitle,updateNoteContent,deleteNote,displayNote,displaySpecificNote}
+export {createNote,updateNote,deleteNote,displayNote,displaySpecificNote}

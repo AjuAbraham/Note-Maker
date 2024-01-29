@@ -1,0 +1,36 @@
+.note-container{
+    width: 100vw;
+    height: 150vh;
+    >h1{
+        text-align: center;
+        font-size: 3rem;
+        background-color: gray;
+        padding-top: 4.4rem;
+        border-radius: 0 0 50px 50px;
+    }
+    >p{
+        margin: 40px 80px;
+        font-size: 1.2rem;
+        text-wrap: wrap;
+        height: 100%;
+        border: 1px solid black;
+        border-radius: 20px;
+        >h2{
+            text-align: center;
+        }
+    }
+    >.button-div{
+        margin-top: 50px;
+        display: flex;
+        justify-content: end;
+        margin-inline: 90%;
+        >button{
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+    }
+}

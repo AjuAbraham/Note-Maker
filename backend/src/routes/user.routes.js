@@ -7,7 +7,7 @@ const router = Router();
 router.route('/register-user').post(upload.single('avatar'),registerUser);
 router.route('/log-in').post(loginUser)
 
-router.route('./logout').post(verifyLoggedIn,logOut);
+router.route('/logout').get(verifyLoggedIn,logOut);
 router.route('/update-detail').patch(verifyLoggedIn,updateDetail);
 router.route('/update-avatar').patch(verifyLoggedIn,upload.single('avatar'),updateAvatar);
 router.route('/refresh-accessToken').get(verifyLoggedIn,refreshAccessToken);

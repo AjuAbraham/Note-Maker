@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../scss/Auth.scss'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link,useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 const Login = () => {
     const [user ,setUser] = useState({
@@ -20,8 +20,8 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8000/api/v1/users/log-in',user,{withCredentials:true});
-            console.log(response);
-            navigate('/notes')
+            const {username,avatar} = response.data.data.user;
+            navigate(`/notes/${username}/${encodeURIComponent(avatar)}/`)
         } catch (error) {
             console.log("login error: ",error);
         }

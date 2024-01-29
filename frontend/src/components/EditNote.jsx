@@ -30,11 +30,11 @@ const EditNote = () => {
   const handleSubmitting = async (e)=>{
        e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/notes/create-note",note,{withCredentials:true} );
+      const response = await axios.patch(`http://localhost:8000/api/v1/notes/update-note/${noteId}`,note,{withCredentials:true} );
       console.log("res is : ",response);
       navigate('/notes')
     } catch (error) {
-      console.log("error at creating note is: ",error)
+      console.log("error at updating note is: ",error)
     }
   }
   return (
