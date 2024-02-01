@@ -28,7 +28,7 @@ const DisplayNote = () => {
      <p>
         <h2>Content</h2>
         <br/>
-        {note.content}
+        <p className='content'>{note.content}</p>
     </p>
     </div>
     </>

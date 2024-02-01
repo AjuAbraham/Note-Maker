@@ -6,12 +6,13 @@ import '../scss/Note.scss';
 import {Link,useNavigate,useParams} from 'react-router-dom'
 import {MdDelete,MdEditDocument } from "react-icons/md";
 import axios from 'axios'
+import Nav from './Nav.jsx';
 
 
 const Notes = () => {
   const [note,setNote] = useState([])
+  const [title,setTitle] = useState('');
   const [hide ,setHide] = useState(false);
-  const [signout,setsignOut] = useState(false);
   const navigate = useNavigate();
   const fetchCards = async()=>{
     try {
@@ -22,6 +23,7 @@ const Notes = () => {
       console.log("error in getting notes is: ",error)
     }
   }
+
   const handleDelete= async (noteId)=>{
     if(!noteId){
       console.log("delete button did'nt send noteId")
@@ -34,16 +36,22 @@ const Notes = () => {
       console.log("Error while deleting is: ",error);
     }
   }
-  const handleLogOut = async ()=>{
-       try {
-        const res = await axios.get("http://localhost:8000/api/v1/users/logout",{withCredentials:true});
-        navigate('/login')
-        console.log("response on logout is: ",res.data.message);
-       } catch (error) {
-        console.log("Error at logout is: ",error);
-       }
+ const handleSearchChange = (e)=>{
+  setTitle(e.target.value)
+  if(e.target.value===''){
+    fetchCards();
   }
-  const {username,avatar} = useParams();
+ }
+  const handleSearch = async(e)=>{
+    e.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:8000/api/v1/notes/search-note?titleSearch=${title}`,{withCredentials:true});
+      console.log("search res is: ",response);
+      setNote(typeof response.data.data==='string'? [] : response.data.data);
+    } catch (error) {
+      console.log("error at search is : ",error);
+    }
+  }
   useEffect(()=>{
     
     fetchCards();
@@ -51,31 +59,18 @@ const Notes = () => {
   return (
     <>
        <div className="container">
-       <div className="nav">
-        <div className='logoHead'>
-         <h4> {username}</h4>
-          </div>
-        <div className='profile' onClick={()=>setsignOut(!signout)}>
-          <img src={avatar} alt="404" />
-        </div>
-       </div>
+       <Nav/>
        <div className='create-button'>
         <button><Link className='link' to={'/createNote'}>Create Note</Link> </button>
         <div className='search' onClick={()=>setHide(!hide)}><TbReportSearch size={'40px'} /></div>
        </div>
         <div className='search-form'>
           { hide?
-          <form>
-            <input type="text" placeholder='Enter Title to search'/>
-            <div className='document-search'><FaSearch size={'20px'} /></div>
+          <form onSubmit={handleSearch} >
+            <input type="text" placeholder='Enter Title to search' onChange={handleSearchChange}/>
+            <button className='document-search' type='submit' ><FaSearch size={'20px'} /></button>
           </form>  : null
            }
-        </div>
-        <div className='drop-box'>
-         {
-          signout?  <button onClick={handleLogOut}>Sign out</button> : null
-          
-         }
         </div>
         <div className="card-box">
       { 

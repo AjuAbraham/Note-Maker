@@ -1,0 +1,55 @@
+.nav{
+    display: flex;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    background-color: blueviolet;
+}
+.logoHead{
+    >h4{
+        margin-left: 150px;
+        color: white;
+        font-size: 20px;
+    }
+
+}
+.profile{
+     margin-right: 40px;
+     cursor: pointer;
+     position: relative;
+     
+>img{
+    width: 60px; 
+    height: 60px; 
+    border-radius: 50%;
+    &:active {
+        border: 3px solid white;
+     }
+}
+}
+.sign-out-container{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-right: 34px;
+    padding-top: 50px;
+    >.singout-button{
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(247, 6, 6);
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        &:active{
+            background-color: white;
+            color: red;
+        }
+    }
+}
+.isActive{
+    display: none;
+}

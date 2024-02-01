@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import {Link, useParams,useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import Nav from './Nav.jsx';
 
 const EditNote = () => {
   const [note,setNote] = useState([]);
@@ -40,14 +41,7 @@ const EditNote = () => {
   return (
     <>
     <div className="container">
-    <div className="nav">
-        <div className='logoHead'>
-         <h4> Note Maker</h4>
-          </div>
-        <div className='profile'>
-          <img src="/profile.jpg" alt="404" />
-        </div>
-       </div>
+    <Nav/>
 
       <div className="createNoteArea">
       <form autoComplete='off' onSubmit={handleSubmitting}>

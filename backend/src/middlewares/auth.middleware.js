@@ -6,7 +6,6 @@ import ApiError from '../utils/ApiError.js';
 const verifyLoggedIn = asyncHandler(async (req,_,next)=>{
     try {
           const accessToken = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer","");
-          console.log("accessToken is: ",accessToken)
           if(!accessToken){
             throw new ApiError(400,"unauthorized acess")
           }

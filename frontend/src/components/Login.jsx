@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import '../scss/Auth.scss'
-import { Link,useNavigate, useParams } from 'react-router-dom'
+import { Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import {useDispatch} from 'react-redux';
+import { addNavDetail } from '../Features/navSlice.js';
 const Login = () => {
+    const dispatch = useDispatch();
     const [user ,setUser] = useState({
         email:'',
         password:''
@@ -21,7 +24,8 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:8000/api/v1/users/log-in',user,{withCredentials:true});
             const {username,avatar} = response.data.data.user;
-            navigate(`/notes/${username}/${encodeURIComponent(avatar)}/`)
+            dispatch(addNavDetail({username,avatar}));
+            navigate("/notes")
         } catch (error) {
             console.log("login error: ",error);
         }

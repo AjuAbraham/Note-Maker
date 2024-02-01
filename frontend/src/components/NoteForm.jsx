@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import '../scss/NoteForm.scss';
 import axios from 'axios'
+import Nav from './Nav.jsx';
 
 const NoteForm = () => {
   const navigate = useNavigate();
@@ -32,14 +33,7 @@ const NoteForm = () => {
   return (
     <>
     <div className="container">
-    <div className="nav">
-        <div className='logoHead'>
-         <h4> Note Maker</h4>
-          </div>
-        <div className='profile'>
-          <img src="/profile.jpg" alt="404" />
-        </div>
-       </div>
+    <Nav/>
 
       <div className="createNoteArea">
       <form autoComplete='off' onSubmit={handleNewNote}>

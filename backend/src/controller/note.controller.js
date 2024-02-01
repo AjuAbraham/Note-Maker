@@ -84,4 +84,38 @@ const displaySpecificNote = asyncHandler(async (req,res)=>{
    res.status(200).json(new ApiResponse(200,note,"note fetched successfully"))
 })
 
-export {createNote,updateNote,deleteNote,displayNote,displaySpecificNote}
+const searchNote = asyncHandler(async (req,res)=>{
+    const {titleSearch} = req.query;
+    if(!titleSearch){
+        throw new ApiError(400,"Title is required to search");
+    }
+    const result = await Note.aggregate([
+       {
+        $search:{
+            index: 'searchTest',
+            text:{
+                query: titleSearch,
+                path: 'title',
+            }
+        }
+       },
+       {
+        $project:{
+            _id:1,
+            title:1,
+            createdAt:1,
+        }
+       }
+    ]);
+    if(result.length==0){
+        throw new ApiError(500,"No such note exsist");
+    }
+    if(!result){
+        throw new ApiError(500,"unable to fetch the note");
+    }
+    res.status(200).json(new ApiResponse(200,result,"note fetched successfully"));
+})
+
+
+
+export {createNote,updateNote,deleteNote,displayNote,displaySpecificNote,searchNote}
