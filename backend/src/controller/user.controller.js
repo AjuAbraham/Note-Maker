@@ -5,7 +5,6 @@ import ApiResponse from '../utils/ApiResponse.js';
 import {uploadToCloudinary,deleteFromCloudinary} from '../utils/cloudinary.js'
 import { regexEmail } from '../contants.js';
 import Jwt from  'jsonwebtoken';
-import { isValidObjectId } from 'mongoose';
 
 const generateAcessTokenAndRefreshToken = async (userId)=>{
     try {
@@ -21,6 +20,7 @@ const generateAcessTokenAndRefreshToken = async (userId)=>{
 }
 const registerUser = asyncHandler(async(req,res)=>{  
     const {username,email,password} = req.body;
+    const avatar='';
     if ([username,email,password].some((field)=>field.trim()=="")) {
         throw new ApiError(400,"All field are required")
     }
@@ -31,19 +31,21 @@ const registerUser = asyncHandler(async(req,res)=>{
     if(user){
         throw new ApiError(409,"User with this email or username already  exsist")
     }
-    const avatarLocalPath = req.file?.path;
-    if(!avatarLocalPath){
+    if(req.file){
+        const avatarLocalPath = req.file?.path;
+       if(!avatarLocalPath){
         throw new ApiError(400,"Unable to upload image to local server")
-    }
-    const avatar = await uploadToCloudinary(avatarLocalPath);
-    if(!avatarLocalPath){
+       }
+       const avatar = await uploadToCloudinary(avatarLocalPath);
+       if(!avatarLocalPath){
         throw new ApiError(400,"Unable to upload image to  server");
+       }
     }
     const createUser = await User.create({
         username,
         email,
         password,
-        avatar: avatar?.url 
+        avatar: avatar?.url || ''
     });
     const userCreated = await User.findById(createUser._id).select("-password -refreshToken");
     if(!userCreated){
@@ -94,11 +96,35 @@ const logOut = asyncHandler(async (req,res)=>{
 
 const updateDetail = asyncHandler(async (req,res)=>{
     const {username} = req.body;
-     if(!username){
-        throw new ApiError(400,"Username is required to update");
+     if(!username && !req.file){
+        throw new ApiError(400,"Username or avatar is required to update");
      }
+     const updateField = {}
+    if(username){
+         updateField.username = username;
+    }
+    if(req.file){
+
+        const getPrevAvatar = await User.findById(req.user?._id);
+        if(!getPrevAvatar){
+            throw new ApiError(500,"Unable to fetch user")
+        }
+        const removePrevAvatar = await deleteFromCloudinary(getPrevAvatar.avatar);
+        if(!removePrevAvatar){
+            throw new ApiError(500,"unable to remove prev image");
+        }
+        const avatarLocalPath = req.file?.path;
+        if(!avatarLocalPath){
+            throw new ApiError(400,"unable to fetch image");
+        }
+        const newAvatar = await uploadToCloudinary(avatarLocalPath);
+        if(!newAvatar){
+            throw new ApiError(500,"Unable to upload image to server")
+        }
+        updateField.avatar= newAvatar.url;
+    }
     const user = await User.findByIdAndUpdate(req.user?._id,{
-        $set:{username:username}
+        $set:{...updateField}
     },{new:true}).select("-password -refreshToken");
     if(!user){
         throw new ApiError(400,"Unable to update the user")
@@ -107,35 +133,6 @@ const updateDetail = asyncHandler(async (req,res)=>{
       .json(new ApiResponse(200,user,"Username updated successfully"))
 })
 
-const updateAvatar = asyncHandler(async (req,res)=>{
-    const userId = req.user?._id;
-    if(!isValidObjectId(userId)){
-        throw new ApiError(400,"Invalid user Id")
-    }
-    const avatarLocalPath = req.file?.path;
-    if(!avatarLocalPath){
-        throw new ApiError(400,"unable to fetch image");
-    }
-    const newAvatar = await uploadToCloudinary(avatarLocalPath);
-    if(!newAvatar){
-        throw new ApiError(500,"Unable to upload image to server")
-    }
-    const getPrevAvatar = await User.findById(userId);
-    if(!getPrevAvatar){
-        throw new ApiError(500,"Unable to fetch user")
-    }
-    const removePrevAvatar = await deleteFromCloudinary(getPrevAvatar.avatar);
-    if(!removePrevAvatar){
-        throw new ApiError(500,"unable to remove prev image");
-    }
-    const update = await User.findByIdAndUpdate(userId,{
-        $set:{avatar:newAvatar.url}
-    },{new:true})
-    if(!update){
-        throw new ApiError(500,"Unable to update avatar with new image")
-    }
-    res.status(200).json(new ApiResponse(200,update.avatar,'User updated successfully'));
-})
 const refreshAccessToken = asyncHandler (async (req,res)=>{
     const incomingRefreshToken = req.cookies?.refreshToken || req.body.refreshToken
     if(!incomingRefreshToken){
@@ -164,4 +161,4 @@ const refreshAccessToken = asyncHandler (async (req,res)=>{
 
 })
 
-export {registerUser,loginUser,logOut,updateDetail,updateAvatar,refreshAccessToken}
+export {registerUser,loginUser,logOut,updateDetail,refreshAccessToken}

@@ -7,6 +7,7 @@ import Notes from './components/Notes.jsx'
 import NoteForm from './components/NoteForm.jsx'
 import EditNote from './components/EditNote.jsx'
 import DisplayNote from './components/DisplayNote.jsx'
+import UpdateUserProfile from './components/UpdateUserProfile.jsx'
 function App() {
  
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/notes' element={ <Notes/> }/>
         <Route path='/notes' element={ <Notes/> }/>
+        <Route path='/update-profile' element={ <UpdateUserProfile/> }/>
         <Route path='/createNote' element={ <NoteForm/> }/>
         <Route path='/editNote/:noteId' element={ <EditNote/> }/>
         <Route path='/currentNote/:noteId' element={ <DisplayNote/> }/>

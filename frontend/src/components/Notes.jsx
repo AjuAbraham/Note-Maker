@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { TbReportSearch } from "react-icons/tb";
 import { FaSearch } from "react-icons/fa";
 import '../scss/Note.scss';
-import {Link,useNavigate,useParams} from 'react-router-dom'
+import {Link,useNavigate} from 'react-router-dom'
 import {MdDelete,MdEditDocument } from "react-icons/md";
 import axios from 'axios'
 import Nav from './Nav.jsx';
@@ -12,8 +12,9 @@ import Nav from './Nav.jsx';
 const Notes = () => {
   const [note,setNote] = useState([])
   const [title,setTitle] = useState('');
-  const [hide ,setHide] = useState(false);
+  const [hide ,setHide] = useState(true);
   const navigate = useNavigate();
+  let hideClass = hide? 'hide' : 'form-hideClass';
   const fetchCards = async()=>{
     try {
       const response = await axios.get('http://localhost:8000/api/v1/notes/display-note',{withCredentials:true});
@@ -52,8 +53,7 @@ const Notes = () => {
       console.log("error at search is : ",error);
     }
   }
-  useEffect(()=>{
-    
+  useEffect(()=>{ 
     fetchCards();
   },[]);
   return (
@@ -65,12 +65,11 @@ const Notes = () => {
         <div className='search' onClick={()=>setHide(!hide)}><TbReportSearch size={'40px'} /></div>
        </div>
         <div className='search-form'>
-          { hide?
-          <form onSubmit={handleSearch} >
+         
+          <form className={hideClass} onSubmit={handleSearch} >
             <input type="text" placeholder='Enter Title to search' onChange={handleSearchChange}/>
             <button className='document-search' type='submit' ><FaSearch size={'20px'} /></button>
-          </form>  : null
-           }
+          </form> 
         </div>
         <div className="card-box">
       { 
@@ -87,7 +86,7 @@ const Notes = () => {
                 </Link>
               </div>         
           </div>
-          <h4 onClick={()=>navigate(`/currentNote/${note._id}`)}>Title:{note.title}</h4> 
+          <p onClick={()=>navigate(`/currentNote/${note._id}`)}>Title: {note.title}</p> 
           <div className="detail-container" onClick={()=>navigate(`/currentNote/${note._id}`)}>
           <hr />
           <p>Created At:{new  Date(note.createdAt).toLocaleString('en-Us',{

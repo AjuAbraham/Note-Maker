@@ -10,7 +10,7 @@ const Register = () => {
     email:'',
     password:'',
   });
-  const [file,setFile] = useState();
+  const [file,setFile] = useState(null);
   const navigate = useNavigate();
   const handleChange = (e)=>{
     let name = e.target.name;
@@ -30,7 +30,9 @@ const Register = () => {
     formData.append("username",user.username)
     formData.append("email",user.email)
     formData.append("password",user.password)
-    formData.append("avatar",file)
+    if(file !== 'null'){
+        formData.append("avatar",file)
+    }
     try {
         const response = await axios.post('http://localhost:8000/api/v1/users/register-user',formData);
         console.log(response);

@@ -1,0 +1,94 @@
+.containers{
+   border: 1px solid black;  
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background:  linear-gradient(to top left , purple, #073278);
+}
+.form-detail{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    width: 600px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.53);;
+    .title{
+        text-align: center;
+        color: black;
+    }
+       
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    >form input{
+        margin-top: 10px;
+    }
+}
+
+#newAvatar{
+    display: none;
+}
+.usernameInput{
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+.new-detail{
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: black;
+}
+.newAvatar{
+    cursor: pointer;
+    background-color: rgb(151, 6, 255);
+    width: 7rem;
+    border-radius: 5px;
+    color: white;
+    padding: 0.4rem;
+    &:active{
+        background-color: white;
+        color: rgb(151, 6, 255);
+    }
+}
+.buttons{
+    text-align: center;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    >.submit-button{
+        background-color: blue;
+        border-radius: 5px;
+        padding: 10px;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        border: none;
+        &:hover{
+           background-color: rgb(57, 57, 249);
+        }
+        &:active{
+            background-color: red;
+            color: white;
+        }
+    }
+    >.cancel-button{
+        background-color: white;
+        border-radius: 5px;
+        padding: 10px;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        border: 1px solid black;
+        &:active{
+            border: none;
+        }
+    }
+}
