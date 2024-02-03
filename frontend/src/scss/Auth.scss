@@ -111,3 +111,19 @@ label{
     font-weight: bold;
 }
 
+@media (max-width:375px) {
+    .outerContainer{
+        width: 120vw;
+        height: 120vh;
+        background: linear-gradient(to top left , purple, #073278);
+    }
+    .innerContainer{
+        top:10%;
+     }
+}
+@media (width:425px) {
+    .innerContainer{
+        width: 360px;
+        top: 5%;
+    }
+}

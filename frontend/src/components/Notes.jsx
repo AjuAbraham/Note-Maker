@@ -58,7 +58,7 @@ const Notes = () => {
   },[]);
   return (
     <>
-       <div className="container">
+
        <Nav/>
        <div className='create-button'>
         <button><Link className='link' to={'/createNote'}>Create Note</Link> </button>
@@ -104,7 +104,6 @@ const Notes = () => {
       </div>
 
 
-      </div>
     </>
   )
 }

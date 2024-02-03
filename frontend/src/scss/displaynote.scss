@@ -6,6 +6,7 @@
         font-size: 3rem;
         background-color: gray;
         padding-top: 4.4rem;
+        color: black;
         border-radius: 0 0 50px 50px;
     }
     >p{
@@ -37,6 +38,57 @@
             cursor: pointer;
             &:hover{
                 background-color: rgb(44, 44, 237);
+            }
+        }
+    }
+}
+
+@media (max-width:425px) {
+    .note-container{
+        width: 100vw;
+        height: 150vh;
+        >h1{
+            font-size: 1.2rem;
+        }
+        >p{
+            margin: 20px 20px;
+            font-size: 0.9rem;
+            text-wrap: wrap;
+            width: 90%;
+            height: 50%;
+            border: 1px solid black;
+            border-radius: 20px;
+            >h2{
+                text-align: center;
+                font-size: 2rem;
+            }
+            >.content{
+                margin: 20px 20px;
+            }
+        }
+    }
+}
+@media (width:768px) {
+    .note-container{
+        width: 100vw;
+        height: 150vh;
+        >h1{
+            font-size: 1.8rem;
+        }
+        >p{
+            margin: 20px 20px;
+            font-size: 0.9rem;
+            text-wrap: wrap;
+            width: 90%;
+            height: 50%;
+            border: 1px solid black;
+            border-radius: 20px;
+            >h2{
+                text-align: center;
+                font-size: 2rem;
+            }
+            >.content{
+                margin: 20px 20px;
             }
         }
     }

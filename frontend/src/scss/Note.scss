@@ -1,7 +1,4 @@
-.container{
-    max-width: 100vw;
-    height: 140vh;
-}
+
 
 .create-button{
     display: flex;
@@ -71,7 +68,7 @@
 }
 .card-box{
     display: flex;
-    width: 100%;
+    
     margin-top:150px;
     margin-left: 150px;
     flex-wrap: wrap;
@@ -107,6 +104,7 @@
             margin-top: 15px;
             >p{
                 font-size: 0.9rem;
+                font-weight: bold;
                 color: rgb(126, 120, 120);
             }
         }
@@ -129,5 +127,76 @@
         border: none;
         border-radius: 8px;
         cursor: pointer;
+    }
+}
+
+@media (max-width:425px) {
+    .search-form{
+        margin-top: 40px;
+        margin-left: 180px;
+        left:-90px;
+        top: 200px;
+    }
+    .note-delete-edit{
+        display: flex;
+        gap: 5px;
+    }
+    .card-box{
+        margin-top:150px;
+        margin-left: 40px;
+        >.card-Contain{
+            width: 280px;
+            height: 200px;
+        >.detail-container{
+                margin-top: 20px;
+                >p{
+                    font-size: 0.8rem;
+                    color: rgb(126, 120, 120);
+                }
+            }
+        }
+    }
+}
+@media (width:768px) {
+    .search-form{
+        margin-top: 40px;
+        margin-left: 180px;
+        left:200px;
+        top: 200px;
+    }
+    .note-delete-edit{
+        display: flex;
+        gap: 5px;
+    }
+    .card-box{
+        margin-top:150px;
+        margin-left: 40px;
+        >.card-Contain{
+            width: 280px;
+            height: 200px;
+        >.detail-container{
+                margin-top: 20px;
+                >p{
+                    font-size: 0.8rem;
+                    color: rgb(126, 120, 120);
+                }
+            }
+        }
+    }
+}
+@media (width:1024px) {
+    .search-form{
+        margin-top: 40px;
+        margin-left: 180px;
+        left: 320px;
+        top: 200px;
+    }
+}
+@media (width:1440px) {
+    .search-form{
+        margin-top: 40px;
+        margin-left: 180px;
+        left: 500px;
+        top: 200px;
     }
 }

@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import {Link, useParams,useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import Nav from './Nav.jsx';
-
+import '../scss/NoteForm.scss'
 const EditNote = () => {
   const [note,setNote] = useState([]);
   const {noteId} = useParams();
