@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "http://localhost:8000/api/v1",
+    baseURL: "https://notemaker-4i4g.onrender.com",
 })
 
 export default api;
