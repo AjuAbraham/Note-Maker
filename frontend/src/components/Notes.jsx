@@ -15,13 +15,14 @@ const Notes = () => {
   const [hide ,setHide] = useState(true);
   const navigate = useNavigate();
   let hideClass = hide? 'hide' : 'form-hideClass';
+  
   const fetchCards = async()=>{
     try {
       const response = await axios.get('http://localhost:8000/api/v1/notes/display-note',{withCredentials:true});
        setNote(typeof response.data.data === 'string' ? [] : response.data.data);
-      console.log("response is : ",response);
     } catch (error) {
-      console.log("error in getting notes is: ",error)
+      console.log("error in getting notes is: ",error);
+      navigate('/login')
     }
   }
 
@@ -31,7 +32,6 @@ const Notes = () => {
     }
     try {
       const response = await axios.delete(`http://localhost:8000/api/v1/notes/delete-note/${noteId}`,{withCredentials:true});
-      console.log("result of delete is: ",response);
       fetchCards();
     } catch (error) {
       console.log("Error while deleting is: ",error);
@@ -47,7 +47,6 @@ const Notes = () => {
     e.preventDefault();
     try {
       const response = await axios.get(`http://localhost:8000/api/v1/notes/search-note?titleSearch=${title}`,{withCredentials:true});
-      console.log("search res is: ",response);
       setNote(typeof response.data.data==='string'? [] : response.data.data);
     } catch (error) {
       console.log("error at search is : ",error);

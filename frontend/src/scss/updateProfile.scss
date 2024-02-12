@@ -37,6 +37,9 @@
     width: 100%;
     padding: 10px;
     border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.526);
+    font-size: 1.1rem;
+    font-weight: bold;
     border: 1px solid black;
 }
 .new-detail{
@@ -46,20 +49,29 @@
     color: black;
 }
 .newAvatar{
+    display: flex;
+    align-items: center;
+    gap: 15px;
     cursor: pointer;
     background-color: rgb(151, 6, 255);
-    width: 7rem;
+    width: 10rem;
     border-radius: 5px;
     color: white;
     padding: 0.4rem;
+    &:hover{
+        background-color: rgba(151, 6, 255, 0.681);
+    }
     &:active{
         background-color: white;
         color: rgb(151, 6, 255);
     }
+    >label{
+        cursor: pointer;
+    }
 }
 .buttons{
     text-align: center;
-    margin-top: 80px;
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -75,20 +87,47 @@
            background-color: rgb(57, 57, 249);
         }
         &:active{
-            background-color: red;
-            color: white;
+            background-color: white ;
+            color: blue;
         }
     }
     >.cancel-button{
-        background-color: white;
-        border-radius: 5px;
+        background-color: red;
+        color: white;
         padding: 10px;
-        color: black;
+        border-radius: 5px;
+        border: none;
         font-weight: bold;
         cursor: pointer;
-        border: 1px solid black;
         &:active{
-            border: none;
+            background-color: white;
+            color: red;
         }
+    }
+}
+.image-submit-container{
+    display: flex;
+    flex-direction: column;
+    >.newAvatarLabel{
+        margin-top: 5px;
+        font-weight: bold;
+    }
+    >.image-submit-subclass{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+}
+.remove-img{
+    margin-top: 10px;
+    font-size: 0.92rem;
+    >button{
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        padding: 0.5rem;
+        font-weight: bold;
+        background-color: rgb(3, 74, 255);
+        color: white;
     }
 }

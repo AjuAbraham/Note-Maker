@@ -12,7 +12,6 @@ const EditNote = () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/v1/notes/displayA-note/${noteId}`,{withCredentials:true});
          setNote(response.data.data);
-        console.log("response is : ",response);
       } catch (error) {
         console.log("error in getting notes is: ",error)
       }
@@ -32,7 +31,6 @@ const EditNote = () => {
        e.preventDefault();
     try {
       const response = await axios.patch(`http://localhost:8000/api/v1/notes/update-note/${noteId}`,note,{withCredentials:true} );
-      console.log("res is : ",response);
       navigate('/notes')
     } catch (error) {
       console.log("error at updating note is: ",error)

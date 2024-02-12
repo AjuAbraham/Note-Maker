@@ -62,7 +62,7 @@ label{
 .profile-picButton{
     cursor: pointer;
     background-color: rgba(148, 0, 254, 0.51);
-    width: 10rem;
+    width: 12rem;
     border-radius: 5px;
     padding: 0.4rem;
     &:hover {
@@ -109,6 +109,15 @@ label{
     text-decoration: none;
     color: rgba(255, 0, 0, 0.752);
     font-weight: bold;
+}
+.red-border{
+    border: 3px solid red;
+}
+
+.image-submit-contain{
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 @media (max-width:375px) {

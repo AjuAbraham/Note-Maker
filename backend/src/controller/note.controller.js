@@ -4,14 +4,14 @@ import ApiResponse from '../utils/ApiResponse.js';
 import {Note} from '../models/note.model.js';
 import { isValidObjectId } from 'mongoose';
 
-const createNote = asyncHandler(async (req,res)=>{
+const createNote = asyncHandler(async (req,res,next)=>{
     const {title,content} = req.body;
-    if(!(title || content)){
-        throw new ApiError(400,"Both Title and content is required");
+    if(!title || !content){
+         next(new ApiError(400,"Both Title and content is required"))
     }
     const note= await Note.findOne({title});
     if(note){
-        throw new ApiError(400,"This Title already exsist");
+        next(new ApiError(400,"This Title already exsist"))
     }
     const createNote = await Note.create({
         title,
@@ -20,7 +20,7 @@ const createNote = asyncHandler(async (req,res)=>{
     })
     const checkCreated = await Note.findById(createNote?._id);
     if(!checkCreated){
-        throw new ApiError(500,"Note was not created")
+        next(new ApiError(500,"Unable To Create Note"))
     }
     res.status(200).json(new ApiResponse(200,checkCreated,"Note created successfully"))
 })

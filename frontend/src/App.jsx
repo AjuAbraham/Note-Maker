@@ -8,6 +8,7 @@ import NoteForm from './components/NoteForm.jsx'
 import EditNote from './components/EditNote.jsx'
 import DisplayNote from './components/DisplayNote.jsx'
 import UpdateUserProfile from './components/UpdateUserProfile.jsx'
+
 function App() {
  
 

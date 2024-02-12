@@ -20,7 +20,6 @@ const Nav = () => {
      localStorage.removeItem("username");
      localStorage.removeItem("avatar");
      navigate('/login')
-     console.log("response on logout is: ",res.data.message);
     } catch (error) {
      console.log("Error at logout is: ",error);
     }

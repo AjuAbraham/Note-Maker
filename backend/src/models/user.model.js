@@ -20,9 +20,6 @@ const userSchema = new mongoose.Schema({
     avatar:{
         type:String,
     },
-    refreshToken:{
-        type:String
-    }
 },{timestamps:true})
 
 userSchema.pre('save',async function (next){
@@ -43,13 +40,5 @@ userSchema.methods.generateAcessToken = function (){
     }
     )
 }
-userSchema.methods.generateRefreshToken =function () {
-    return Jwt.sign({
-        _id: this._id
-    },process.env.REFRESH_TOKEN_SECRET,
-    {
-        expiresIn: process.env.REFRESH_TOKEN_EXPIERY
-    }
-    )
-}
+
 export const User = mongoose.model("User",userSchema);

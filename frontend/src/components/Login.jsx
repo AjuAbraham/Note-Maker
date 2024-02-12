@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../scss/Auth.scss'
 import { Link,useNavigate} from 'react-router-dom'
 import axios from 'axios'
+import {  toast } from 'react-toastify';
 const Login = () => {
     const [user ,setUser] = useState({
         email:'',
@@ -25,7 +26,7 @@ const Login = () => {
             localStorage.setItem("avatar",avatar);
             navigate("/notes")
         } catch (error) {
-            console.log("login error: ",error);
+            toast.error(`${error.response.data.message}`);
         }
     }
   return (

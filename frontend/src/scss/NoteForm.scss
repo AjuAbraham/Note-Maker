@@ -53,6 +53,16 @@
     }
    
 }
+.profile-picLabel{
+    margin-top: 10px;
+}
+.image-submit-contain{
+    >.internal-image-contain{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
 
 @media (max-width:425px) {
     .createNoteArea{

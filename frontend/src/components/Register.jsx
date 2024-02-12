@@ -3,7 +3,9 @@ import { useState } from 'react'
 import '../scss/Auth.scss'
 import axios from 'axios'
 import { Link,useNavigate } from 'react-router-dom'
-
+import {  toast } from 'react-toastify';
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { IoImagesOutline } from "react-icons/io5";
 const Register = () => {
   const [user,setUser]= useState({
     username:'',
@@ -34,11 +36,10 @@ const Register = () => {
         formData.append("avatar",file)
     }
     try {
-        const response = await axios.post('http://localhost:8000/api/v1/users/register-user',formData);
-        console.log(response);
+        const response = await axios.post('http://localhost:8000/api/v1/users/register-user',formData)
          navigate('/login')
     } catch (error) {
-        console.log("register error is: ",error);
+        toast.error(`${error.response.data.message}`);
     }
  }
   return (
@@ -61,10 +62,18 @@ const Register = () => {
                     <p>
                         <label htmlFor="password">Password<sup>*</sup></label>
                         <input type="password" name="password" id="password" onChange={handleChange}  placeholder='Enter your password' />
+                        <label htmlFor="avatar" className='profile-picLabel'>Avatar</label>
                     </p>
                     <p>
-                        <label htmlFor="avatar" className='profile-picButton'>Choose Avatar Image</label>
+                        <div className="image-submit-contain">
+                        <div className='internal-image-contain'>
+                        <label htmlFor="avatar" className='profile-picButton'><IoImagesOutline size={25} />  Choose Avatar Image</label>
                         <input type="file" id='avatar' onChange={(e)=>setFile(e.target.files[0])} />
+                        {
+                            (file!==null)? <IoMdCheckmarkCircleOutline color='green' size={30} /> :  null
+                        }
+                        </div>
+                        </div>
                     </p>
                     <p>
                         <button type='submit' id='form-submit'>Create an Account</button>

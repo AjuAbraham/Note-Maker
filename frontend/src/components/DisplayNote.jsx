@@ -11,7 +11,6 @@ const DisplayNote = () => {
           try {
             const response = await axios.get(`http://localhost:8000/api/v1/notes/displayA-note/${noteId}`,{withCredentials:true});
              setNote(response.data.data);
-            console.log("response is : ",response);
           } catch (error) {
             console.log("error in getting notes is: ",error)
           }

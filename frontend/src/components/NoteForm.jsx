@@ -3,6 +3,7 @@ import {Link,useNavigate} from 'react-router-dom'
 import '../scss/NoteForm.scss';
 import axios from 'axios'
 import Nav from './Nav.jsx';
+import {toast} from 'react-toastify'
 
 const NoteForm = () => {
   const navigate = useNavigate();
@@ -24,10 +25,9 @@ const NoteForm = () => {
     console.log(note)
     try {
       const response = await axios.post("http://localhost:8000/api/v1/notes/create-note",note,{withCredentials:true} );
-      console.log("res is : ",response);
       navigate('/notes')
     } catch (error) {
-      console.log("error at creating note is: ",error)
+      toast.error(`${error.response.data.message}`)
     }
   }
   return (
