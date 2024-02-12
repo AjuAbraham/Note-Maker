@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {Link,useNavigate} from 'react-router-dom'
 import '../scss/NoteForm.scss';
-import axios from 'axios'
+import axios from '../axios.jsx'
 import Nav from './Nav.jsx';
 import {toast} from 'react-toastify'
 
@@ -24,7 +24,7 @@ const NoteForm = () => {
     e.preventDefault();
     console.log(note)
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/notes/create-note",note,{withCredentials:true} );
+      const response = await axios.post("/notes/create-note",note,{withCredentials:true} );
       navigate('/notes')
     } catch (error) {
       toast.error(`${error.response.data.message}`)

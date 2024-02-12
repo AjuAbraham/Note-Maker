@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import "../scss/displaynote.scss"
-import axios from 'axios'
+import axios from '../axios.jsx'
 const DisplayNote = () => {
     const {noteId} = useParams();
     const [note,setNote] = useState([]);
@@ -9,7 +9,7 @@ const DisplayNote = () => {
     useEffect(()=>{
         const fetchCards = async()=>{
           try {
-            const response = await axios.get(`http://localhost:8000/api/v1/notes/displayA-note/${noteId}`,{withCredentials:true});
+            const response = await axios.get(`/notes/displayA-note/${noteId}`,{withCredentials:true});
              setNote(response.data.data);
           } catch (error) {
             console.log("error in getting notes is: ",error)

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../scss/Nav.scss'
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineFollowTheSigns } from "react-icons/md";
-import axios from 'axios'
+import axios from '../axios.jsx'
 import {useNavigate} from 'react-router-dom';
 import { FaUser } from "react-icons/fa";
 
@@ -16,7 +16,7 @@ const Nav = () => {
 
   const handleLogOut = async ()=>{
     try {
-     const res = await axios.get("http://localhost:8000/api/v1/users/logout",{withCredentials:true});
+     const res = await axios.get("/users/logout",{withCredentials:true});
      localStorage.removeItem("username");
      localStorage.removeItem("avatar");
      navigate('/login')

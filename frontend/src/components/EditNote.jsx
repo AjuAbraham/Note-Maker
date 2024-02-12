@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react';
 import {Link, useParams,useNavigate} from 'react-router-dom'
-import axios from 'axios'
+import axios from '../axios.jsx'
 import Nav from './Nav.jsx';
 import '../scss/NoteForm.scss'
 const EditNote = () => {
@@ -10,7 +10,7 @@ const EditNote = () => {
   useEffect(()=>{
     const fetchCards = async()=>{
       try {
-        const response = await axios.get(`http://localhost:8000/api/v1/notes/displayA-note/${noteId}`,{withCredentials:true});
+        const response = await axios.get(`/notes/displayA-note/${noteId}`,{withCredentials:true});
          setNote(response.data.data);
       } catch (error) {
         console.log("error in getting notes is: ",error)
@@ -30,7 +30,7 @@ const EditNote = () => {
   const handleSubmitting = async (e)=>{
        e.preventDefault();
     try {
-      const response = await axios.patch(`http://localhost:8000/api/v1/notes/update-note/${noteId}`,note,{withCredentials:true} );
+      const response = await axios.patch(`/notes/update-note/${noteId}`,note,{withCredentials:true} );
       navigate('/notes')
     } catch (error) {
       console.log("error at updating note is: ",error)

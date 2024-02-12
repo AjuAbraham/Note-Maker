@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 import '../scss/Note.scss';
 import {Link,useNavigate} from 'react-router-dom'
 import {MdDelete,MdEditDocument } from "react-icons/md";
-import axios from 'axios'
+import axios from '../axios.jsx'
 import Nav from './Nav.jsx';
 
 
@@ -18,7 +18,7 @@ const Notes = () => {
   
   const fetchCards = async()=>{
     try {
-      const response = await axios.get('http://localhost:8000/api/v1/notes/display-note',{withCredentials:true});
+      const response = await axios.get('/notes/display-note',{withCredentials:true});
        setNote(typeof response.data.data === 'string' ? [] : response.data.data);
     } catch (error) {
       console.log("error in getting notes is: ",error);
@@ -31,7 +31,7 @@ const Notes = () => {
       console.log("delete button did'nt send noteId")
     }
     try {
-      const response = await axios.delete(`http://localhost:8000/api/v1/notes/delete-note/${noteId}`,{withCredentials:true});
+      const response = await axios.delete(`/notes/delete-note/${noteId}`,{withCredentials:true});
       fetchCards();
     } catch (error) {
       console.log("Error while deleting is: ",error);
@@ -46,7 +46,7 @@ const Notes = () => {
   const handleSearch = async(e)=>{
     e.preventDefault();
     try {
-      const response = await axios.get(`http://localhost:8000/api/v1/notes/search-note?titleSearch=${title}`,{withCredentials:true});
+      const response = await axios.get(`/notes/search-note?titleSearch=${title}`,{withCredentials:true});
       setNote(typeof response.data.data==='string'? [] : response.data.data);
     } catch (error) {
       console.log("error at search is : ",error);

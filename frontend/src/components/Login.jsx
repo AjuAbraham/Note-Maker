@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../scss/Auth.scss'
 import { Link,useNavigate} from 'react-router-dom'
-import axios from 'axios'
+import axios from '../axios.jsx'
 import {  toast } from 'react-toastify';
 const Login = () => {
     const [user ,setUser] = useState({
@@ -20,7 +20,7 @@ const Login = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/users/log-in',user,{withCredentials:true});
+            const response = await axios.post('/users/log-in',user,{withCredentials:true});
             const {username,avatar} = response.data.data.user;
             localStorage.setItem("username",username);
             localStorage.setItem("avatar",avatar);

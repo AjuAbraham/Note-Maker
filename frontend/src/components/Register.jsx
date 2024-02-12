@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import '../scss/Auth.scss'
-import axios from 'axios'
+import axios from '../axios.jsx'
 import { Link,useNavigate } from 'react-router-dom'
 import {  toast } from 'react-toastify';
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
@@ -36,7 +36,7 @@ const Register = () => {
         formData.append("avatar",file)
     }
     try {
-        const response = await axios.post('http://localhost:8000/api/v1/users/register-user',formData)
+        const response = await axios.post('/users/register-user',formData)
          navigate('/login')
     } catch (error) {
         toast.error(`${error.response.data.message}`);

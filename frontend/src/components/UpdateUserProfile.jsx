@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../scss/updateProfile.scss';
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios.jsx';
 import {toast} from 'react-toastify'
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { IoImagesOutline } from "react-icons/io5";
@@ -20,7 +20,7 @@ const UpdateUserProfile = () => {
 
       }
      try {
-      const response = await axios.patch("http://localhost:8000/api/v1/users/update-detail",formdata,{withCredentials:true});
+      const response = await axios.patch("/users/update-detail",formdata,{withCredentials:true});
       localStorage.setItem("username",response.data.data.username);
       localStorage.setItem("avatar",response.data.data.avatar);
       navigate('/notes');
