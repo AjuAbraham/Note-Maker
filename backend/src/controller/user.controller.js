@@ -4,8 +4,6 @@ import ApiError from '../utils/ApiError.js';
 import ApiResponse from '../utils/ApiResponse.js';
 import {uploadToCloudinary,deleteFromCloudinary} from '../utils/cloudinary.js'
 import { regexEmail } from '../contants.js';
-import Jwt from  'jsonwebtoken';
-import { isValidObjectId } from 'mongoose';
 
 const generateAcessTokenAndRefreshToken = async (userId)=>{
     try {
@@ -75,7 +73,7 @@ const loginUser = asyncHandler(async (req,res,next)=>{
    const {accessToken} = await generateAcessTokenAndRefreshToken(userExsist._id);
    const user = await User.findById(userExsist._id).select("-password -refreshToken");
    res.status(200)
-      .cookie("accessToken",accessToken,{httpOnly:true ,secure:true})
+      .cookie("accessToken",accessToken,{httpOnly:true ,secure:true,sameSite:'None'})
       .json(new ApiResponse(200,{user,accessToken:accessToken},"logged in successfully"))
 })
 
