@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "https://notemaker-4i4g.onrender.com/api/v1",
+    baseURL:  import.meta.env.VITE_API,
 })
 
 export default api;
