@@ -119,6 +119,27 @@ label{
     align-items: center;
     gap: 20px;
 }
+.loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader::after{
+    content: "";
+    height: 20px;
+    width: 20px;
+    border: 6px solid #dddddd7a;
+    border-top-color: #084c7a;
+    border-radius: 50%;
+    animation: 0.75s ease infinite loading;
+}
+@keyframes loading {
+    from {transform: rotate(0turn);}
+    to {transform: rotate(1turn);}
+}
+.loader--hidden{
+    display: none;
+}
 
 @media (max-width:375px) {
     .outerContainer{

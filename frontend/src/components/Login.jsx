@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import '../scss/Auth.scss'
 import { Link,useNavigate} from 'react-router-dom'
 import axios from '../axios.jsx'
@@ -8,6 +8,7 @@ const Login = () => {
         email:'',
         password:''
     })
+    const [hidden, setHidden] = useState(true);
     const navigate = useNavigate();
     const handleChange = (e)=>{
         let name = e.target.name;
@@ -19,6 +20,7 @@ const Login = () => {
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        setHidden(!hidden);
         try {
             const response = await axios.post('/users/log-in',user,{withCredentials:true});
             const {username,avatar} = response.data.data.user;
@@ -29,6 +31,7 @@ const Login = () => {
             toast.error(`${error.response.data.message}`);
         }
     }
+    let hiddenClass = hidden===true ? 'loader--hidden': 'loader'
   return (
     <div>
        <div className="outerContainer">
@@ -48,11 +51,12 @@ const Login = () => {
                         <input type="password" name="password" id="password" onChange={handleChange}  placeholder='Enter your password' />
                     </p>
                     <p>
-                        <button type='submit'  id='submitted'>Login In</button>
+                        <button type='submit'  id='submitted'>Log In</button>
                     </p>
                 </form>
                 <p className='already-haveAccount'>Don't have account? <Link className='link' to={'/register'}>Register</Link></p>
             </div>
+            <div className={hiddenClass}></div>
         </div>
     </div>
     </div>
